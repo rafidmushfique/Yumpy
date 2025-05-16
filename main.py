@@ -29,6 +29,9 @@ current_plat_top = 0
 current_plat_left = 0
 current_plat_right = 0
 
+
+
+
 def main():
     global yumping, velo_y, velo_x, yump_power, charging_yump, facing,standing_on_platform,current_plat_top,current_plat_left, current_plat_right
 
@@ -40,7 +43,7 @@ def main():
 
     # Estimate how high a max jump can go (rough guess)
     estimated_jump_height = (yump_maxpower ** 2) // (2 * gravity)
-    platform_spacing = max(estimated_jump_height, 100)  # keep spacing reasonable
+    platform_spacing = int(estimated_jump_height * 0.8)# keep spacing reasonable
 
     # Ensure platforms stay visible
     max_vertical_range = platform_spacing * (num_platforms - 1)
@@ -50,16 +53,23 @@ def main():
     if start_y - max_vertical_range < 0:
         start_y = max_vertical_range + 20
 
-    platforms = []
-    last_x = None
-    for i in range(num_platforms):
-        while True:
-            x = random.randint(0, WIDTH - platform_width)
-            if last_x is None or abs(x - last_x) > platform_width // 2:
-                break
-        last_x = x
-        y = start_y - (i * platform_spacing)
-        platforms.append(pygame.Rect(x, y, platform_width, platform_height))
+    platforms = [
+        pygame.Rect(50, HEIGHT - 300, 30, 150),  # Tall vertical platform (left wall)
+        pygame.Rect(80, HEIGHT - 100, 120, 20),  # Bottom-right horizontal
+        pygame.Rect(140, HEIGHT - 180, 150, 20),  # Middle-right bounce target
+        pygame.Rect(80, HEIGHT - 260, 120, 20),  # Higher platform
+    ]
+
+    # last_x = None
+    # for i in range(num_platforms):
+    #     while True:
+    #         x = random.randint(0, WIDTH - platform_width)
+    #         if last_x is None or abs(x - last_x) > platform_width // 2:
+    #             break
+    #     last_x = x
+    #     y = start_y - (i * platform_spacing)
+    #     platforms.append(pygame.Rect(x, y, platform_width, platform_height))
+
 
     while running:
         screen.fill(WHITE)
