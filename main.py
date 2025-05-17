@@ -9,10 +9,10 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 50)
 
 player = pygame.Rect((WIDTH // 2 - 25, HEIGHT - 30, 30, 30))
-player_movement = 15
+player_movement = 5
 
 gravity = 1
-charge_rate = 1
+charge_rate = 0.5
 yump_minpower = 1
 yump_maxpower = 15
 yump_power = 0
@@ -97,7 +97,7 @@ def main():
                 if not charging_yump:
                     player.x -= player_movement
                     facing = -1
-                    if not (current_plat_left <= player.centerx <= current_plat_right):
+                    if not (current_plat_left + 5 <= player.centerx <= current_plat_right + 5):
                         yumping = True
 
 
@@ -155,10 +155,10 @@ def main():
                         velo_x = 0
                         break
 
-                    elif velo_y < 0 and player.top <= plat.bottom and player.bottom > plat.bottom and \
-                            plat.left < player.right and plat.right > player.left:
+                    elif velo_y < 0 and player.top <= plat.bottom and player.bottom > plat.bottom and plat.left < player.right and plat.right > player.left:
                         player.top = plat.bottom
                         velo_y = 0
+
                         break
 
 

@@ -3,7 +3,7 @@
 # Game Settings
 WIDTH = 800
 HEIGHT = 600
-FPS = 30
+FPS = 60
 
 # Colors (RGB)
 WHITE = (255, 255, 255)
